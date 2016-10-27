@@ -1,7 +1,7 @@
 package code.lemma;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -39,19 +39,20 @@ public class LemmaIndexMapred {
 			title.set(page.getTitle());
 			List<String> content=tokenier.tokenize(page.getContent());	
 			//String[] content=page.getContent().split(" ");
-			HashMap<String,Vector<Integer>> word_map=new HashMap<String,Vector<Integer>>();
+			HashMap<String,ArrayList<Integer>> word_map=new HashMap<String,ArrayList<Integer>>();
 			int position=0;
 			for(String lemma:content){
-				Vector<Integer> cur;
-				if(word_map.containsKey(lemma)){
-					cur=word_map.get(lemma);
+				ArrayList<Integer> cur;
+				String lemma2=lemma;
+				if(word_map.containsKey(lemma2)){
+					cur=word_map.get(lemma2);
 					cur.add(position);
-					word_map.put(lemma, cur);
+					word_map.put(lemma2, cur);
 				}
 				else{
-					cur=new Vector<Integer>();
+					cur=new ArrayList<Integer>();
 					cur.add(position);
-					word_map.put(lemma, cur);
+					word_map.put(lemma2, cur);
 				}
 				position++;
 			}			

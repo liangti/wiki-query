@@ -1,10 +1,11 @@
 package code.inverted;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -22,7 +23,7 @@ import code.lemma.LemmaIndexMapred;
 import code.lemma.LemmaIndexMapred.LemmaIndexMapper;
 import util.StringIntegerList;
 import util.StringIntegerList.StringInteger;
-import util.StringIntegerList.StringIntegerVector;
+import util.StringIntegerList.StringIntegerArray;
 
 /**
  * This class is used for Section C.2 of assignment 1. You are supposed to run
@@ -30,27 +31,47 @@ import util.StringIntegerList.StringIntegerVector;
  * inverted index.
  */
 public class InvertedIndexMapred {
-	public static class InvertedIndexMapper extends Mapper<Text, Text, Text, StringIntegerVector> {
+	public static class InvertedIndexMapper extends Mapper<Text, Text, Text, StringIntegerArray> {
 
 		@Override
 		public void map(Text articleTitle, Text indices, Context context) throws IOException,
 		InterruptedException {
 		// TODO: You should implement inverted index mapper here
 			StringIntegerList indincesList=new StringIntegerList();
-			System.out.print(articleTitle.toString());
-			System.out.println("~~~~~~");
-			System.out.print(indices.toString());	
+			System.out.println(articleTitle+"title");
 			indincesList.readFromString(indices.toString());	
+			List<StringIntegerArray> liv=indincesList.getIndices();
+		    Map<String, ArrayList<Integer>> Sia=indincesList.getMap();
 			
-			List<StringIntegerVector> liv=indincesList.getIndices();
-			for(StringIntegerVector itr : liv){
-				String title=articleTitle.toString();
-				String word=itr.getString();
-				Vector<Integer> position=itr.getValue();
-				StringIntegerVector invert=new StringIntegerVector(title,position);
-				context.write(new Text(word), invert);
-			}
-			
+		    for(String mapKey:Sia.keySet()){
+		    	Text key=new Text();
+		    	key.set(mapKey);
+		    	String title=articleTitle.toString();
+		    	StringIntegerArray value=new StringIntegerArray(title,Sia.get(mapKey));
+		    	context.write(key, value);
+		    	
+		    }
+		    
+		    
+		    
+//			for(StringIntegerArray itr : liv){
+//				
+//				
+//				
+//				
+//				String title=articleTitle.toString();
+//				String word=itr.getString();
+//				ArrayList<Integer> cur=itr.getValue();
+//				ArrayList<Integer> position=new ArrayList<Integer>();
+//				for(int i=0;i<cur.size();i++)
+//					position.add(cur.get(i));
+//				StringIntegerArray invert=new StringIntegerArray(title,position);
+//				Text key=new Text();
+//				key.set(word);
+//				context.write(key, invert);
+//				System.out.println(invert.getValue().size()+"mapper"+word);
+//			}
+//			
 			
 			
 //			List<StringInteger> outputList=indincesList.getIndices();
@@ -67,22 +88,29 @@ public class InvertedIndexMapred {
 		}
 
 	public static class InvertedIndexReducer extends
-			Reducer<Text, StringIntegerVector, Text, StringIntegerList> {
+			Reducer<Text, StringIntegerArray, Text, StringIntegerList> {
 
 		@Override
-		public void reduce(Text lemma, Iterable<StringIntegerVector> articlesAndPos, Context context)
+		public void reduce(Text lemma, Iterable<StringIntegerArray> articlesAndPos, Context context)
 				throws IOException, InterruptedException {
 				// TODO: You should implement inverted index reducer here
-                    HashMap<String,Vector<Integer>> invertedMap=new HashMap<String,Vector<Integer>>();
-                    StringIntegerList value=new StringIntegerList();
-                    for(StringIntegerVector itr: articlesAndPos){
-                    	value.add(itr);
-//                    	String title=itr.getString();
-//                    	Vector<Integer> position=itr.getValue();
-//                    	invertedMap.put(title,position);
+                    HashMap<String,ArrayList<Integer>> invertedMap=new HashMap<String,ArrayList<Integer>>();
+                    //StringIntegerList value=new StringIntegerList();
+                    int index=0;
+                    //System.out.println(lemma.toString()+"lemma");
+                    for(StringIntegerArray itr: articlesAndPos){
+                    	String title=itr.getString();
+                    	//System.out.println(index+"reducer\t"+title);
+                    	index++;
+                    	ArrayList<Integer> position=new ArrayList<Integer>();
+                    	ArrayList<Integer> cur=itr.getValue();
+                    	System.out.println(cur.size()+"size");
+                    	for(int i=0;i<cur.size();i++)
+                    		position.add(cur.get(i));
+                    	invertedMap.put(title,position);
         
                     }
-//                    StringIntegerList value=new StringIntegerList(invertedMap);
+                    StringIntegerList value=new StringIntegerList(invertedMap);
                     
                     context.write(lemma, value);
 //					Text Key=lemma;
@@ -104,10 +132,11 @@ public class InvertedIndexMapred {
 	    Job job = Job.getInstance(conf, "word count");
 	    job.setJarByClass(InvertedIndexMapred.class);
 	    job.setMapperClass(InvertedIndexMapper.class);
+	    
 	    job.setReducerClass(InvertedIndexReducer.class);
 	    job.setInputFormatClass(KeyValueTextInputFormat.class);
 	    job.setOutputKeyClass(Text.class);
-	    job.setOutputValueClass(StringIntegerVector.class);
+	    job.setOutputValueClass(StringIntegerArray.class);
 	    
 
 	    //job.setOutputFormatClass(OutputFormat.class);	 
