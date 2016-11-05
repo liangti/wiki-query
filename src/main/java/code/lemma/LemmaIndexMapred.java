@@ -37,25 +37,46 @@ public class LemmaIndexMapred {
 			Tokenizer tokenier=new Tokenizer();
 			Text title=new Text();
 			title.set(page.getTitle());
-			List<String> content=tokenier.tokenize(page.getContent());	
-			//String[] content=page.getContent().split(" ");
+			String passage=page.getContent();
+			
+			List<String> content=tokenier.tokenize(passage);
+			
+			List<Integer> position=tokenier.position(passage, content);
+			System.out.println("position"+position.size());
 			HashMap<String,ArrayList<Integer>> word_map=new HashMap<String,ArrayList<Integer>>();
-			int position=0;
-			for(String lemma:content){
+			
+			for(int i=0;i<position.size();i++){
 				ArrayList<Integer> cur;
-				String lemma2=lemma;
-				if(word_map.containsKey(lemma2)){
-					cur=word_map.get(lemma2);
-					cur.add(position);
-					word_map.put(lemma2, cur);
+				String token=content.get(i);
+				int pos_index=position.get(i);
+				
+				if(word_map.containsKey(token)){
+					cur=word_map.get(token);
+					cur.add(pos_index);
+					word_map.put(token, cur);
 				}
 				else{
 					cur=new ArrayList<Integer>();
-					cur.add(position);
-					word_map.put(lemma2, cur);
+					cur.add(pos_index);
+					word_map.put(token, cur);
 				}
-				position++;
-			}			
+			}
+			
+//			for(String lemma:content){
+//				ArrayList<Integer> cur;
+//				String lemma2=lemma;
+//				if(word_map.containsKey(lemma2)){
+//					cur=word_map.get(lemma2);
+//					cur.add(position);
+//					word_map.put(lemma2, cur);
+//				}
+//				else{
+//					cur=new ArrayList<Integer>();
+//					cur.add(position);
+//					word_map.put(lemma2, cur);
+//				}
+//				position++;
+//			}			
 			StringIntegerList stringIntegerList=new StringIntegerList(word_map);		
 			context.write(title,stringIntegerList);	
 //			HashMap<String,Integer> word_frequency=new HashMap<String,Integer>();

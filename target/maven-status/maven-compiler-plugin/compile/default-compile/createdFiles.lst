@@ -1,5 +1,4 @@
 util/XMLInputFormat.class
-code/articles/GetArticlesMapred$GetArticlesMapper.class
 code/lemma/LemmaIndexMapred$LemmaIndexMapper.class
 util/WikipediaPageInputFormat$WikipediaPageRecordReader.class
 code/lemma/Tokenizer.class
@@ -9,7 +8,6 @@ code/inverted/InvertedIndexMapred$InvertedIndexReducer.class
 util/IndexableFileInputFormat.class
 util/StringIntegerList.class
 util/WikipediaPageInputFormat.class
-code/articles/GetArticlesMapred.class
 code/inverted/InvertedIndexMapred$InvertedIndexMapper.class
 code/inverted/InvertedIndexMapred.class
 code/lemma/LemmaIndexMapred.class
