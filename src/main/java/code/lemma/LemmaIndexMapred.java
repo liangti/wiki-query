@@ -42,7 +42,7 @@ public class LemmaIndexMapred {
 			List<String> content=tokenier.tokenize(passage);
 			
 			List<Integer> position=tokenier.position(passage, content);
-			System.out.println("position"+position.size());
+			
 			HashMap<String,ArrayList<Integer>> word_map=new HashMap<String,ArrayList<Integer>>();
 			
 			for(int i=0;i<position.size();i++){

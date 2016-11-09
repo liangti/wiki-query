@@ -88,10 +88,7 @@ public class Tokenizer {
 
 	public static String noiseFilter(String sentence) {
 
-		Pattern nonword = Pattern.compile( "[^(\\p{L}|.|!|\\?|,|;)]+");
-		
-			sentence = nonword.matcher(sentence).replaceAll(" ");
-
+		sentence = sentence.replaceAll("\\pP|\\pS"," ");
 
 		return sentence;
 	}
@@ -102,9 +99,12 @@ public class Tokenizer {
 	    	while(doc_index<documentText.length()&&list_index<token.size()){
 	    		String str=token.get(list_index);
 	    		
-	    		if(doc_index+str.length()>=documentText.length())break;
+	    		if(doc_index+str.length()>=documentText.length()){
+	    			System.out.println("barry\t"+str);
+	    			break;
+	    		}
 	    		String comp=documentText.substring(doc_index, doc_index+str.length());
-	    		System.out.println(str+" "+comp);
+	    		//System.out.println(str+" "+comp);
 	    		
 	    		if(comp.equals(str)){
 	    			pos.add(doc_index);
