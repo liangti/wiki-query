@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -38,6 +39,7 @@ import util.StringIntegerList.StringIntegerVector;
 public class Query1{
 	public static class Query1mapper extends Mapper<Text, Text, Text, Text> {
 		public String Query;
+		public List<String> queryWords;
 		
 		@Override
 		protected void setup(Mapper<Text, Text, Text, Text>.Context context)
@@ -46,12 +48,17 @@ public class Query1{
 			Configuration conf = context.getConfiguration();
 			String param = conf.get("query");
 			Query = param;
+			queryWords = new ArrayList<String>(Arrays.asList(Query.split(" ")));
+
 		}
 		@Override
 		public void map(Text word, Text line, Context context) throws IOException,
 		InterruptedException {
-			if (word.toString().equals(Query)){
-				context.write(word, line);
+			for (String s:queryWords){
+				String n = s;
+				if (n.equalsIgnoreCase(word.toString())){
+					context.write(word, line);
+				}
 			}
 			//if (word.equals(Query)){
 			//	context.write(new Text(word), new StringIntegerVector("temp2", temp1));

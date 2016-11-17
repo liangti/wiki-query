@@ -1,6 +1,9 @@
 util/XMLInputFormat.class
+code/querying/Query1.class
 code/articles/GetArticlesMapred$GetArticlesMapper.class
 code/lemma/LemmaIndexMapred$LemmaIndexMapper.class
+code/querying/Query1$Query1mapper.class
+code/querying/Query2.class
 util/WikipediaPageInputFormat$WikipediaPageRecordReader.class
 code/lemma/Tokenizer.class
 util/StringIntegerList$StringInteger.class
