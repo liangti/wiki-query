@@ -1,3 +1,5 @@
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/Query.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/Query1.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/IndexableFileInputFormat.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/WikipediaPageInputFormat.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/lemma/LemmaIndexMapred.java
@@ -5,4 +7,3 @@
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/StringIntegerList.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/lemma/Tokenizer.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/XMLInputFormat.java
-/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/inverted/Query.java

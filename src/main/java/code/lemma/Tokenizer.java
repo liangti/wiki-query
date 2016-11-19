@@ -88,7 +88,7 @@ public class Tokenizer {
 
 	public static String noiseFilter(String sentence) {
 
-		sentence = sentence.replaceAll("\\pP|\\pS"," ");
+		sentence = sentence.replaceAll("\\pP|\\pS","");
 
 		return sentence;
 	}

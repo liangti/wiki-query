@@ -38,7 +38,7 @@ public class LemmaIndexMapred {
 			Text title=new Text();
 			title.set(page.getTitle());
 			String passage=page.getContent();
-			
+
 			List<String> content=tokenier.tokenize(passage);
 			
 			List<Integer> position=tokenier.position(passage, content);
