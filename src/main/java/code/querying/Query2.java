@@ -99,6 +99,17 @@ public class Query2 {
  			writer.close();
  			
  	}
+ 	///returns the number of non-boolean words in the query
+ 	public int getWordCount(String query){
+ 		int count = 0;
+ 		for (String w:query.split(" ")){
+ 			if (!(w.equalsIgnoreCase("not|and|or"))){
+ 				count++;
+ 			}
+ 		}
+ 		return count;
+ 	}
+ 	
 	public static void main(String[] args) throws IOException{
 		//arg 1 is file path
 		//arg 2 is query
