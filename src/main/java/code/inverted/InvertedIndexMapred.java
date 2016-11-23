@@ -18,6 +18,7 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.GenericOptionsParser;
 
 import code.lemma.LemmaIndexMapred;
 import code.lemma.LemmaIndexMapred.LemmaIndexMapper;
@@ -40,7 +41,6 @@ public class InvertedIndexMapred {
 			StringIntegerList indincesList=new StringIntegerList();
 			System.out.println(articleTitle+"title");
 			indincesList.readFromString(indices.toString());	
-			List<StringIntegerArray> liv=indincesList.getIndices();
 		    Map<String, ArrayList<Integer>> Sia=indincesList.getMap();
 			
 		    for(String mapKey:Sia.keySet()){
@@ -129,7 +129,11 @@ public class InvertedIndexMapred {
 		// TODO: you should implement the Job Configuration and Job call
 		// here
 		Configuration conf = new Configuration();
-	    Job job = Job.getInstance(conf, "word count");
+	    
+	    GenericOptionsParser gop=new GenericOptionsParser(conf, args);
+		 String[] otherArgs=gop.getRemainingArgs();
+
+		Job job = Job.getInstance(conf, "word count");
 	    job.setJarByClass(InvertedIndexMapred.class);
 	    job.setMapperClass(InvertedIndexMapper.class);
 	    
@@ -140,8 +144,8 @@ public class InvertedIndexMapred {
 	    
 
 	    //job.setOutputFormatClass(OutputFormat.class);	 
-	    FileInputFormat.addInputPath(job, new Path(args[0]));
-	    FileOutputFormat.setOutputPath(job, new Path(args[1]));
+	    FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
+	    FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
 	    System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }

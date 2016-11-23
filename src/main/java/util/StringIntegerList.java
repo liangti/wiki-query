@@ -183,7 +183,7 @@ public class StringIntegerList implements Writable {
 		List<StringIntegerArray> tempoIndices = new Vector<StringIntegerArray>();
 		Matcher m = p.matcher(indicesStr);
 		while (m.find()) {
-			System.out.println(m.group(1)+"List_read");
+			//System.out.println(m.group(1)+"List_read");
 			String[] readline = m.group(1).split("#");
 	
 			String[] position = readline[1].split(",");
