@@ -20,7 +20,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 
 import util.StringIntegerList;
 import edu.umd.cloud9.collection.wikipedia.WikipediaPage;
-import util.WikipediaPageInputFormat;
+import edu.umd.cloud9.collection.wikipedia.WikipediaPageInputFormat;
 import code.lemma.Tokenizer;
 
 /**
@@ -35,37 +35,37 @@ public class LemmaIndexMapred {
 				InterruptedException {
 			// TODO: implement Lemma Index mapper here
 			if(page.isEmpty())return;
-//			Tokenizer tokenier=new Tokenizer();
-//			Text title=new Text();
-//			title.set(page.getDocid());
-//			String passage=page.getContent();
-//
-//			List<String> content=tokenier.tokenize(passage);
-//			
-//			List<Integer> position=tokenier.position(passage, content);
-//			
-//			HashMap<String,ArrayList<Integer>> word_map=new HashMap<String,ArrayList<Integer>>();
-//			
-//			for(int i=0;i<position.size();i++){
-//				ArrayList<Integer> cur;
-//				String token=content.get(i);
-//				int pos_index=position.get(i);
-//				
-//				if(word_map.containsKey(token)){
-//					cur=word_map.get(token);
-//					cur.add(pos_index);
-//					word_map.put(token, cur);
-//				}
-//				else{
-//					cur=new ArrayList<Integer>();
-//					cur.add(pos_index);
-//					word_map.put(token, cur);
-//				}
-//			}
-//			
-//		
-//			StringIntegerList stringIntegerList=new StringIntegerList(word_map);		
-//			context.write(title,stringIntegerList);	
+			Tokenizer tokenier=new Tokenizer();
+			Text title=new Text();
+			title.set(page.getDocid());
+			String passage=page.getContent();
+
+			List<String> content=tokenier.tokenize(passage);
+			
+			List<Integer> position=tokenier.position(passage, content);
+			
+			HashMap<String,ArrayList<Integer>> word_map=new HashMap<String,ArrayList<Integer>>();
+			
+			for(int i=0;i<position.size();i++){
+				ArrayList<Integer> cur;
+				String token=content.get(i);
+				int pos_index=position.get(i);
+				
+				if(word_map.containsKey(token)){
+					cur=word_map.get(token);
+					cur.add(pos_index);
+					word_map.put(token, cur);
+				}
+				else{
+					cur=new ArrayList<Integer>();
+					cur.add(pos_index);
+					word_map.put(token, cur);
+				}
+			}
+			
+		
+			StringIntegerList stringIntegerList=new StringIntegerList(word_map);		
+			context.write(title,stringIntegerList);	
 
 		}
 	}

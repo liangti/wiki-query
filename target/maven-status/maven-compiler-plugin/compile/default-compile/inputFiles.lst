@@ -1,11 +1,13 @@
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/Query.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/Query1.java
-/Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/IndexableFileInputFormat.java
-/Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/WikipediaPageInputFormat.java
-/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/lemma/LemmaIndexMapred.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/inverted/InvertedIndexMapred.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/StringIntegerList.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/inverted/filter.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/RandomQuery.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/RandomAccess.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/RandomLocalQuery.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/IndexableFileInputFormat.java
+/Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/lemma/LemmaIndexMapred.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/lemma/Tokenizer.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/util/XMLInputFormat.java
 /Users/uuisafresh/Documents/workspace/wiki/src/main/java/code/querying/Query2.java

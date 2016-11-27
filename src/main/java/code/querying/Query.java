@@ -26,7 +26,7 @@ import org.apache.hadoop.fs.FileSystem;
 import util.StringIntegerList;
 import edu.umd.cloud9.collection.wikipedia.WikipediaPage;
 
-import util.WikipediaPageInputFormat;
+import edu.umd.cloud9.collection.wikipedia.WikipediaPageInputFormat;
 import code.lemma.Tokenizer;
 
 /**

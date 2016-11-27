@@ -142,7 +142,7 @@ public class StringIntegerList implements Writable {
 	}
 
 	
-	
+	private String indiceString;
 	private List<StringIntegerArray> indices;
 	private Map<String, ArrayList<Integer>> indiceMap;
 	private Pattern p = Pattern.compile("<([^<>]*)>");
@@ -178,7 +178,21 @@ public class StringIntegerList implements Writable {
 		String indicesStr = WritableUtils.readCompressedString(arg0);
 		readFromString(indicesStr);
 	}
-
+	
+	public Map<String,String> readFromStringtoString(String indicesStr) throws IOException{
+		Matcher m = p.matcher(indicesStr);
+		Map<String,String> map=new HashMap<String,String>();
+		
+		while (m.find()) {
+			//System.out.println(m.group(1)+"List_read");
+			String[] readline = m.group(1).split("#");
+			this.indiceString=readline[1];
+	        map.put(readline[0], readline[1]);
+		}
+		return map;
+		
+	}
+	
 	public void readFromString(String indicesStr) throws IOException {
 		List<StringIntegerArray> tempoIndices = new Vector<StringIntegerArray>();
 		Matcher m = p.matcher(indicesStr);
