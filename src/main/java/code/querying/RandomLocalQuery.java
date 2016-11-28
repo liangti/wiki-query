@@ -1,6 +1,8 @@
 package code.querying;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -34,6 +36,9 @@ public class RandomLocalQuery {
 
 		Path outputPath=new Path(args[2]);
 		SequenceFile.Writer writer = new SequenceFile.Writer(fs, conf, outputPath, Text.class, Text.class);
+		
+		File file = new File("test_output.txt");
+		FileWriter fw = new FileWriter(file);
 		
 		Map<String,String> map=new HashMap<String,String>();
 		
@@ -82,9 +87,10 @@ public class RandomLocalQuery {
 				int begin=Integer.parseInt(split[i]);
 				String outcontent=content.substring(begin,begin+len);
 				writer.append(word, new Text(outcontent));
-				
+				fw.write(word+"\t"+outcontent+"\n");
 			}
 		}
+		fw.close();
 		writer.close();
 	}
 
