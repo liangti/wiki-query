@@ -18,7 +18,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import edu.umd.cloud9.collection.wikipedia.WikipediaPage;
-import util.WikipediaPageInputFormat;
+import edu.umd.cloud9.collection.wikipedia.WikipediaPageInputFormat;
 
 /**
  * This class is used for Section A of assignment 1. You are supposed to

@@ -1,10 +1,13 @@
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/lemma/getarticles.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/articles/GetArticlesMapred.java
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/Query1.java
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/util/IndexableFileInputFormat.java
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/GetDocs.java
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/randomaccesstest.java
+/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/QueryProcessor.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/inverted/InvertedIndexMapred.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/lemma/LemmaIndexMapred.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/util/StringIntegerList.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/util/XMLInputFormat.java
-/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/Query1.java
-/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/util/IndexableFileInputFormat.java
-/Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/util/WikipediaPageInputFormat.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/lemma/Tokenizer.java
 /Users/kelleylynch/Documents/NIS_Wiki/wiki-query/src/main/java/code/querying/Query2.java

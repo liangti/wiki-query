@@ -1,5 +1,10 @@
 package code.querying;
-
+/*
+ * This is the second step in processing a query
+ * it takes as input the filtered inverted index from Query1 and produces an index of
+ * docid	<word#offset>
+ * author:Kelley
+ */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -114,8 +119,8 @@ public class Query2 {
 		//arg 1 is file path
 		//arg 2 is query
 		
-		Query2 process = new Query2(args[0], args[1]);
-		String[] queryWords = args[1].split(" ");
+		Query2 process = new Query2(args[1], args[2]);
+		String[] queryWords = args[2].split(" ");
 		HashSet<String> result;
 		result = initialResult(queryWords[0]);
 		int i = 1;

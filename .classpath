@@ -32,5 +32,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/kelleylynch/.m2/repository/org/apache/hbase/hbase-server/1.0.0-cdh5.4.1/hbase-server-1.0.0-cdh5.4.1.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.apache.hbase"/>
+			<attribute name="maven.artifactId" value="hbase-server"/>
+			<attribute name="maven.version" value="1.0.0-cdh5.4.1"/>
+			<attribute name="maven.scope" value="compile"/>
+			<attribute name="maven.optionaldependency" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
