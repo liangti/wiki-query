@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,20 +32,37 @@ public class GetDocs {
 		Configuration conf = new Configuration();
 		WikipediaForwardIndex f = new WikipediaForwardIndex(conf);
 		File tempfile = new File("temp.txt");
-		BufferedWriter bw = new BufferedWriter(new FileWriter(tempfile));
+		FileWriter bw = new FileWriter(tempfile);
 		f.loadIndex(new Path("/user/hadoop04/lt/forward_index/wiki.findex.dat"), new Path("/user/hadoop04/lt/forward_index/wiki.dat"), FileSystem.get(conf));
 		String filepath = args[1];
-		BufferedReader br = new BufferedReader(new FileReader(filepath));
-		String line = br.readLine();
+		String query = args[2];
+		
+		QueryProcessor qp = new QueryProcessor(filepath, query);
+		qp.processQuery(query);
+		String results = qp.getResults();
+		Scanner scanner = new Scanner(results);
+		
 		WikipediaPage page;
 		Pattern p = Pattern.compile("<(.*?)#(.*?)>");
-		while (line != null){
+		int count = 0;
+		String line = scanner.nextLine();
+		while (scanner.hasNext()){
+			if (count > 30){
+				line = scanner.nextLine();
+				count ++;
+				continue;
+			}
+			count ++;
 			String[] pieces = line.split("\t");
-			String docid = pieces[0];;
+			if (pieces.length < 2){
+				line = scanner.nextLine();
+				continue;
+			}
+			String docid = pieces[0];
 			String wordsandoffsets = pieces[1];
 			page = f.getDocument(docid);
 			if (page == null){
-				line = br.readLine();
+				line = scanner.nextLine();
 				continue;
 			}
 			bw.write("<title>" + page.getTitle() + "</title>\n");
@@ -64,25 +82,12 @@ public class GetDocs {
 			bw.write(wordsandoffsets);
 
 			bw.write("</positions>");
-			
-			Matcher m = p.matcher(wordsandoffsets);
-			String word = m.group(1);
-			String offsets = m.group(2);
-			
-			String[] offsetList = offsets.split(",");
-			bw.write("<test>");
-			for (String off:offsetList ){
-				int offsetint = Integer.parseInt(off);
-				String incontext = page.getContent().substring(offsetint, word.length());
-				bw.write(incontext);
-			}
-			bw.write("</test>");
-			
-			line = br.readLine();
+			line = scanner.nextLine();
 		}
+		bw.write("<count>" + String.valueOf(count) + "</count>");
 		bw.flush();
 		bw.close();
-		br.close();
+		scanner.close();
 		
 	}
 
